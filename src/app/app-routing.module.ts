@@ -7,7 +7,14 @@ const appRoutes: Routes = [
   {
     path: "",
     component: LayoutComponent,
-    children: [{ path: "", component: HomePageComponent }]
+    children: [
+      { path: "", component: HomePageComponent },
+      {
+        path: "users",
+        loadChildren: () =>
+          import("./modules/users/users.module").then(mod => mod.UsersModule)
+      }
+    ]
   }
 ];
 
