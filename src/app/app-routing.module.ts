@@ -1,12 +1,13 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { LayoutComponent } from "./components/layout/layout.component";
+import { HomePageComponent } from "./pages/home-page/home-page.component";
 
 const appRoutes: Routes = [
   {
     path: "",
     component: LayoutComponent,
-    children: [{ path: "", }]
+    children: [{ path: "", component: HomePageComponent }]
   }
 ];
 
