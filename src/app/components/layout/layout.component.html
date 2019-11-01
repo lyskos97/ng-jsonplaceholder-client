@@ -1,6 +1,31 @@
 <div class="root">
   <mat-toolbar color="primary">
-    <mat-toolbar-row> NG-JSONPLACEHOLDER-CLIENT</mat-toolbar-row>
+    <mat-toolbar-row fxLayout="row center">
+      <button mat-button routerLink="/">
+        NG-JSONPLACEHOLDER-CLIENT
+      </button>
+
+      <mat-nav-list fxLayout>
+        <mat-list-item>
+          <a routerLink="/users">Users</a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/posts">Posts</a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/todos">Todos</a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/comments">Comments</a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/albums">Albums</a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/photos">Photos</a>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-toolbar-row>
   </mat-toolbar>
 
   <main class="main">
