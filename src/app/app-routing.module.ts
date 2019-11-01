@@ -28,6 +28,11 @@ const appRoutes: Routes = [
         path: "todos",
         loadChildren: () =>
           import("./modules/todos/todos.module").then(mod => mod.TodosModule)
+      },
+      {
+        path: "photos",
+        loadChildren: () =>
+          import("./modules/photos/photos.module").then(mod => mod.PhotosModule)
       }
     ]
   }
