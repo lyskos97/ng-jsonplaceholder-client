@@ -33,6 +33,13 @@ const appRoutes: Routes = [
         path: "photos",
         loadChildren: () =>
           import("./modules/photos/photos.module").then(mod => mod.PhotosModule)
+      },
+      {
+        path: "comments",
+        loadChildren: () =>
+          import("./modules/comments/comments.module").then(
+            mod => mod.CommentsModule
+          )
       }
     ]
   }
