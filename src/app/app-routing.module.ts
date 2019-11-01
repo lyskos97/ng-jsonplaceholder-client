@@ -23,6 +23,11 @@ const appRoutes: Routes = [
         path: "albums",
         loadChildren: () =>
           import("./modules/albums/albums.module").then(mod => mod.AlbumsModule)
+      },
+      {
+        path: "todos",
+        loadChildren: () =>
+          import("./modules/todos/todos.module").then(mod => mod.TodosModule)
       }
     ]
   }
