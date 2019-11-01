@@ -13,6 +13,11 @@ const appRoutes: Routes = [
         path: "users",
         loadChildren: () =>
           import("./modules/users/users.module").then(mod => mod.UsersModule)
+      },
+      {
+        path: "posts",
+        loadChildren: () =>
+          import("./modules/posts/posts.module").then(mod => mod.PostsModule)
       }
     ]
   }
