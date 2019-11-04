@@ -1,42 +1,44 @@
-<div class="root">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row fxLayout="row center">
-      <button mat-button routerLink="/">
-        NG-JSONPLACEHOLDER-CLIENT
-      </button>
-
-      <mat-nav-list fxLayout>
-        <mat-list-item>
-          <a routerLink="/users">Users</a>
-        </mat-list-item>
-        <mat-list-item>
-          <a routerLink="/posts">Posts</a>
-        </mat-list-item>
-        <mat-list-item>
-          <a routerLink="/todos">Todos</a>
-        </mat-list-item>
-        <mat-list-item>
-          <a routerLink="/comments">Comments</a>
-        </mat-list-item>
-        <mat-list-item>
-          <a routerLink="/albums">Albums</a>
-        </mat-list-item>
-        <mat-list-item>
-          <a routerLink="/photos">Photos</a>
-        </mat-list-item>
-      </mat-nav-list>
-    </mat-toolbar-row>
-  </mat-toolbar>
-
-  <main class="main">
-    <router-outlet></router-outlet>
-  </main>
-
-  <footer class="footer">
+<mat-drawer-container autosize>
+  <div class="root">
     <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        @lyskos97
+      <mat-toolbar-row fxLayout="row center">
+        <button mat-button routerLink="/">
+          NG-JSONPLACEHOLDER-CLIENT
+        </button>
+
+        <mat-nav-list fxLayout>
+          <mat-list-item>
+            <a routerLink="/users">Users</a>
+          </mat-list-item>
+          <mat-list-item>
+            <a routerLink="/posts">Posts</a>
+          </mat-list-item>
+          <mat-list-item>
+            <a routerLink="/todos">Todos</a>
+          </mat-list-item>
+          <mat-list-item>
+            <a routerLink="/comments">Comments</a>
+          </mat-list-item>
+          <mat-list-item>
+            <a routerLink="/albums">Albums</a>
+          </mat-list-item>
+          <mat-list-item>
+            <a routerLink="/photos">Photos</a>
+          </mat-list-item>
+        </mat-nav-list>
       </mat-toolbar-row>
     </mat-toolbar>
-  </footer>
-</div>
+
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer class="footer">
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          @lyskos97
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </footer>
+  </div>
+</mat-drawer-container>
