@@ -18,14 +18,14 @@ export class ApiService {
     let _params = new HttpParams();
 
     for (let k in params) {
-      _params.append(k, params[k]);
+      _params = _params.append(k, params[k]);
     }
 
     return _params;
   }
 
   get<T>(suburl: string, params?: IParams): Observable<T> {
-    const q = params ? this.convertToUrlParams(params) : {};
+    const q = this.convertToUrlParams(params || {});
 
     return this.http.get<T>(this.apiUrl + suburl, { params: q });
   }

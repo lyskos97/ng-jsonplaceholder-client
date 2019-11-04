@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  ActivatedRoute,
-  Router
-} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { IUser } from 'src/app/interfaces/models/user';
+import { IPost } from 'src/app/interfaces/models/post';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-user-details-page',
@@ -15,8 +13,13 @@ import { IUser } from 'src/app/interfaces/models/user';
 export class UserDetailsPageComponent implements OnInit {
   userId: string;
   user: IUser;
+  posts: IPost[] = [];
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private postService: PostService
+  ) {
     this.userId = this.route.snapshot.paramMap.get('id');
   }
 
@@ -26,11 +29,9 @@ export class UserDetailsPageComponent implements OnInit {
     });
   }
 
-  get userJson() {
-    if (this.user) {
-      return JSON.stringify(this.user, null, 2);
-    }
-
-    return '';
+  loadPosts() {
+    this.postService.getPosts({ userId: this.userId }).subscribe(posts => {
+      this.posts = posts;
+    });
   }
 }

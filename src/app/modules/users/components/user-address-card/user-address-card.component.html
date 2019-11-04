@@ -1,0 +1,47 @@
+<mat-card class="mat-elevation-z4">
+  <mat-card-title>
+    <h3 class="mat-title"><mat-icon>apartment</mat-icon> Address</h3>
+  </mat-card-title>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+    <mat-list fxLayout="row wrap" fxLayoutGap="2%">
+      <mat-list-item fxFlex="48%">
+        <div>
+          <h4 class="mat-caption">City</h4>
+          <p>{{ address.city }}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item fxFlex="48%">
+        <div>
+          <h4 class="mat-caption">Street</h4>
+          <p>{{ address.street }}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item fxFlex="48%">
+        <div>
+          <h4 class="mat-caption">Suite</h4>
+          <p>{{ address.suite }}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item fxFlex="48%">
+        <div>
+          <h4 class="mat-caption">Zipcode</h4>
+          <p>{{ address.zipcode }}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item fxFlex="48%">
+        <div>
+          <h4 class="mat-caption">Geo</h4>
+          <p>lat {{ address.geo.lat }}, lng {{ address.geo.lng }}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
