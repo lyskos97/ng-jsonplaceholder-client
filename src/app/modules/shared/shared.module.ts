@@ -9,7 +9,8 @@ import {
   MatToolbarModule,
   MatSidenavModule,
   MatIconModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatGridListModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -39,7 +40,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatGridListModule
   ]
 })
 export class SharedModule {}

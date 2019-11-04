@@ -12,6 +12,7 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class UserDetailsPageComponent implements OnInit {
   userId: string;
+
   user: IUser;
   posts: IPost[] = [];
 

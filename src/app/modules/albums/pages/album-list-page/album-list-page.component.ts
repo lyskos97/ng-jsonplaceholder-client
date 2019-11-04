@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlbumService } from 'src/app/services/album.service';
+import { IAlbum } from 'src/app/interfaces/models/album';
 
 @Component({
   selector: 'app-album-list-page',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./album-list-page.component.css']
 })
 export class AlbumListPageComponent implements OnInit {
+  albums: IAlbum[] = [];
 
-  constructor() { }
+  constructor(private albumService: AlbumService) {}
 
   ngOnInit() {
+    this.albumService.getAlbums().subscribe(albums => {
+      this.albums = albums;
+    });
   }
-
 }

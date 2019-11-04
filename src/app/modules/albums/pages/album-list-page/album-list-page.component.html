@@ -1,1 +1,15 @@
-<p>album-list-page works!</p>
+<div class="container">
+  <h1 class="mat-display-1">Albums <mat-icon>photo_library</mat-icon></h1>
+
+  <div fxLayout="row wrap" fxLayoutGap="3%">
+    <div *ngFor="let album of albums" fxFlex="30%">
+      <mat-card style="margin-bottom: 10px;">
+        <mat-card-title>{{ album.title }}</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-actions fxLayout fxLayoutAlign="end">
+          <a mat-stroked-button routerLink="/albums/{{ album.id }}">Open</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
