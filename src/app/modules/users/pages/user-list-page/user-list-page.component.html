@@ -1,1 +1,21 @@
-<p>user-list-page works!</p>
+<h1>Users</h1>
+
+<div>
+  <table mat-table [dataSource]="users">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <th mat-cell *matCellDef="let user">{{ user.id }}</th>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <th mat-cell *matCellDef="let user">{{ user.name }}</th>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <th mat-cell *matCellDef="let user">{{ user.email }}</th>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="TABLE_COLUMNS"></tr>
+    <tr mat-row *matRowDef="let row; columns: TABLE_COLUMNS"></tr>
+  </table>
+</div>
