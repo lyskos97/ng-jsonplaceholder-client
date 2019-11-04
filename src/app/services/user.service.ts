@@ -13,4 +13,8 @@ export class UserService {
   getUserList(params?: ISearchParams) {
     return this.api.get<IUser[]>('/users', { params });
   }
+
+  getUser(id: number) {
+    return this.api.get<IUser>(`/users/${id}`);
+  }
 }
