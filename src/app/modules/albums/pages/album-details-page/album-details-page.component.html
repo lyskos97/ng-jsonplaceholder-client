@@ -1,1 +1,12 @@
-<p>album-details-page works!</p>
+<div class="container">
+  <mat-card *ngIf="album">
+    <mat-card-header>
+      <mat-card-title>{{ album.title }}</mat-card-title>
+      <mat-card-subtitle *ngIf="album.user">
+        <a routerLink="/users/{{ album.user.id }}">{{ album.user.name }}</a>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>photos...</mat-card-content>
+  </mat-card>
+</div>
