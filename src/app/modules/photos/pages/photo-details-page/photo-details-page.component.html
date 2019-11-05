@@ -1,1 +1,27 @@
-<p>photo-details-page works!</p>
+<div class="container">
+  <div fxLayout>
+    <mat-card *ngIf="photo$ | async as photo">
+      <mat-card-header>
+        <mat-card-title>{{ photo.title }}</mat-card-title>
+        <mat-card-subtitle
+          >Album:
+          <a routerLink="/albums/{{ photo.album.id }}">{{
+            photo.album.title
+          }}</a></mat-card-subtitle
+        >
+        <mat-card-subtitle
+          >Author:
+          <a routerLink="/users/{{ photo.album.user.id }}">{{
+            photo.album.user.name
+          }}</a></mat-card-subtitle
+        >
+      </mat-card-header>
+
+      <img mat-card-image [src]="photo.url" alt="photo.title" />
+
+      <mat-card-content>
+        <p class="mat-h3">{{ photo.title }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -41,7 +41,7 @@ export class AlbumDetailsPageComponent implements OnInit {
   }
 
   loadAlbum() {
-    this.albumService.getAlbumWithUser(this.albumId).subscribe(album => {
+    this.albumService.getAlbum(this.albumId).subscribe(album => {
       this.album = album;
     });
   }

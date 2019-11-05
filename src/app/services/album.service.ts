@@ -25,7 +25,7 @@ export class AlbumService {
     return this.api.get<IAlbum[]>('/albums', params);
   }
 
-  getAlbumWithUser(id: number | string): Observable<IAlbumWithAuthor> {
+  getAlbum(id: number | string): Observable<IAlbumWithAuthor> {
     return this.api
       .get<IAlbum>(`/albums/${id}`)
       .pipe(
