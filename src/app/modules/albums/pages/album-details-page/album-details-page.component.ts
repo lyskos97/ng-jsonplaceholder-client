@@ -4,6 +4,8 @@ import { IAlbum } from 'src/app/interfaces/models/album';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { IUser } from 'src/app/interfaces/models/user';
+import { IPhoto } from 'src/app/interfaces/models/photo';
+import { PhotoService } from 'src/app/services/photo.service';
 
 interface AlbumWithUser extends IAlbum {
   user?: IUser;
@@ -17,9 +19,10 @@ interface AlbumWithUser extends IAlbum {
 export class AlbumDetailsPageComponent implements OnInit {
   albumId: string;
   album: AlbumWithUser;
+  photos: IPhoto[] = [];
 
   constructor(
-    private userService: UserService,
+    private photoService: PhotoService,
     private albumService: AlbumService,
     private route: ActivatedRoute
   ) {
@@ -27,12 +30,19 @@ export class AlbumDetailsPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.albumService.getAlbum(this.albumId).subscribe(album => {
-      this.album = album;
+    this.loadAlbum();
+    this.loadPhotos();
+  }
 
-      this.userService.getUser(album.userId).subscribe(user => {
-        this.album.user = user;
-      });
+  loadPhotos() {
+    this.photoService.getPhotos({ albumId: this.albumId }).subscribe(photos => {
+      this.photos = photos;
+    });
+  }
+
+  loadAlbum() {
+    this.albumService.getAlbumWithUser(this.albumId).subscribe(album => {
+      this.album = album;
     });
   }
 }

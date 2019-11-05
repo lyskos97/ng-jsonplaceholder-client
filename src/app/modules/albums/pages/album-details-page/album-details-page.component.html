@@ -7,6 +7,16 @@
       </mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content>photos...</mat-card-content>
+    <mat-card-content>
+      <mat-grid-list cols="4" rowHeight="1:1" gutterSize="25">
+        <mat-grid-tile *ngFor="let p of photos">
+          <a routerLink="/photos/{{ p.id }}">
+            <img [src]="p.url" [alt]="p.title" />
+          </a>
+
+          <mat-grid-tile-footer>{{ p.title }}</mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
   </mat-card>
 </div>
