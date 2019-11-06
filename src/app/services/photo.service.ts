@@ -9,7 +9,7 @@ import { IUser } from '../interfaces/models/user';
 import { Observable } from 'rxjs';
 
 interface IParams extends ISearchParams {
-  albumId: number | string;
+  albumId?: number | string;
 }
 
 interface IPhotoWithAlbum extends IPhoto {
