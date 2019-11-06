@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from 'src/app/services/post.service';
+import { CommentService } from 'src/app/services/comment.service';
 
 @Component({
   selector: 'app-post-list-page',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-list-page.component.css']
 })
 export class PostListPageComponent implements OnInit {
+  posts$ = this.postService.getPosts({ _limit: 20, _page: 1 });
 
-  constructor() { }
+  constructor(
+    private postService: PostService,
+    private commentService: CommentService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  loadComments(postId) {
+    return this.commentService.getComments({ postId });
   }
-
 }

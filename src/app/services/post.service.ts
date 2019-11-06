@@ -10,7 +10,7 @@ import { CommentService } from './comment.service';
 import { IComment } from '../interfaces/models/comment';
 
 interface IFilters extends ISearchParams {
-  userId: number | string;
+  userId?: number | string;
 }
 
 interface IPostWithAuhorAndComments extends IPost {

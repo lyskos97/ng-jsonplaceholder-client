@@ -1,1 +1,39 @@
-<p>post-list-page works!</p>
+<div class="container">
+  <h1 class="mat-h1">Posts</h1>
+
+  <div *ngIf="posts$ | async as posts">
+    <mat-card *ngFor="let post of posts" style="margin-bottom: 10px;">
+      <mat-card-title>{{ post.title }}</mat-card-title>
+
+      <mat-card-content>{{ post.body }}</mat-card-content>
+
+      <div>
+        <button
+          mat-stroked-button
+          (click)="post.comments$ = loadComments(post.id); post.showComments = !post.showComments"
+        >
+          Show comments
+        </button>
+
+        <div *ngIf="post.showComments && post.comments$ | async as comments" style="padding: 5px;">
+          <mat-divider></mat-divider>
+
+          <h4 class="mat-h3" style="margin-top: 10px;">Comments</h4>
+
+          <mat-card
+            *ngFor="let comment of comments"
+            class="mat-elevation-z3"
+            style="margin-bottom: 5px;"
+          >
+            <mat-card-content>
+              <p class="mat-body-2">{{ comment.name }}</p>
+              <p class="mat-body-1">{{ comment.body }}</p>
+            </mat-card-content>
+
+            <mat-card-subtitle>by {{ comment.email }}</mat-card-subtitle>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
