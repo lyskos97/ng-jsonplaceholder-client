@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { PostService } from 'src/app/services/post.service';
 import { TodoService } from 'src/app/services/todo.service';
+import { AlbumService } from 'src/app/services/album.service';
 
 @Component({
   selector: 'app-user-details-page',
@@ -15,12 +16,14 @@ export class UserDetailsPageComponent implements OnInit {
   user$ = this.userService.getUser(this.userId);
   posts$ = this.postService.getPosts({ userId: this.userId });
   todos$ = this.todoService.getTodos({ userId: this.userId });
+  albums$ = this.albumService.getAlbums({ userId: this.userId });
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private postService: PostService,
-    private todoService: TodoService
+    private todoService: TodoService,
+    private albumService: AlbumService
   ) {}
 
   ngOnInit() {}

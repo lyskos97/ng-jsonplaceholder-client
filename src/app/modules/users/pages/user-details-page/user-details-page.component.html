@@ -41,28 +41,39 @@
       </mat-expansion-panel>
 
       <mat-expansion-panel>
-        <mat-expansion-panel-header>Comments</mat-expansion-panel-header>
-
-        <div>...</div>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel>
         <mat-expansion-panel-header>Albums</mat-expansion-panel-header>
 
-        <div>...</div>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>Photos</mat-expansion-panel-header>
-
-        <div>...</div>
+        <ng-template matExpansionPanelContent>
+          <div
+            *ngIf="albums$ | async as albums"
+            fxLayout="row wrap"
+            fxLayoutGap="3%"
+          >
+            <div *ngFor="let album of albums" fxFlex="47%">
+              <a routerLink="/albums/{{ album.id }}">
+                <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
+                  <mat-card-content
+                    fxLayout
+                    fxLayoutAlign="space-between center"
+                  >
+                    <span class="mat-h2">{{ album.title }}</span>
+                  </mat-card-content>
+                </mat-card>
+              </a>
+            </div>
+          </div>
+        </ng-template>
       </mat-expansion-panel>
 
       <mat-expansion-panel>
         <mat-expansion-panel-header>Todos</mat-expansion-panel-header>
 
         <ng-template matExpansionPanelContent>
-          <div *ngIf="todos$ | async as todos" fxLayout="row wrap" fxLayoutGap="3%">
+          <div
+            *ngIf="todos$ | async as todos"
+            fxLayout="row wrap"
+            fxLayoutGap="3%"
+          >
             <div *ngFor="let todo of todos" fxFlex="47%">
               <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
                 <mat-card-title fxLayout fxLayoutAlign="space-between center">
