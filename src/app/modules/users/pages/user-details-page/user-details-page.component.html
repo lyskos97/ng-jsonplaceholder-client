@@ -62,8 +62,8 @@
         <mat-expansion-panel-header>Todos</mat-expansion-panel-header>
 
         <ng-template matExpansionPanelContent>
-          <div *ngIf="todos$ | async as todos" fxLayout="row wrap">
-            <div *ngFor="let todo of todos" fxFlex="60%">
+          <div *ngIf="todos$ | async as todos" fxLayout="row wrap" fxLayoutGap="3%">
+            <div *ngFor="let todo of todos" fxFlex="47%">
               <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
                 <mat-card-title fxLayout fxLayoutAlign="space-between center">
                   <span class="mat-h2"
