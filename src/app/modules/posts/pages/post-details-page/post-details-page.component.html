@@ -1,1 +1,30 @@
-<p>post-details-page works!</p>
+<div class="container" fxLayout>
+  <mat-card *ngIf="post$ | async as post">
+    <mat-card-header>
+      <mat-card-title>{{ post.title }}</mat-card-title>
+      <mat-card-subtitle
+        >by
+        <a routerLink="/users/{{ post.author.id }}">{{
+          post.author.name
+        }}</a></mat-card-subtitle
+      >
+    </mat-card-header>
+
+    <mat-card-content>{{ post.body }}</mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-footer class="comments">
+      <h3 class="mat-h3">Comments</h3>
+
+      <mat-card *ngFor="let comment of post.comments" class="comment mat-elevation-z4">
+        <mat-card-subtitle>by {{ comment.email }}</mat-card-subtitle>
+
+        <mat-card-content>
+          <h4 class="mat-body-2">{{ comment.name }}</h4>
+          <p class="mat-body-1">{{ comment.body }}</p>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-footer>
+  </mat-card>
+</div>
