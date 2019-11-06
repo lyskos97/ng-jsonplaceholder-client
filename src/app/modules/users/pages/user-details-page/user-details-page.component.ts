@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { IUser } from 'src/app/interfaces/models/user';
-import { IPost } from 'src/app/interfaces/models/post';
 import { PostService } from 'src/app/services/post.service';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-user-details-page',
@@ -11,28 +10,20 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./user-details-page.component.css']
 })
 export class UserDetailsPageComponent implements OnInit {
-  userId: string;
+  userId = this.route.snapshot.params['id'];
 
-  user: IUser;
-  posts: IPost[] = [];
+  user$ = this.userService.getUser(this.userId);
+  posts$ = this.postService.getPosts({ userId: this.userId });
+  todos$ = this.todoService.getTodos({ userId: this.userId });
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private postService: PostService
-  ) {
-    this.userId = this.route.snapshot.paramMap.get('id');
-  }
+    private postService: PostService,
+    private todoService: TodoService
+  ) {}
 
-  ngOnInit() {
-    this.userService.getUser(+this.userId).subscribe(user => {
-      this.user = user;
-    });
-  }
+  ngOnInit() {}
 
-  loadPosts() {
-    this.postService.getPosts({ userId: this.userId }).subscribe(posts => {
-      this.posts = posts;
-    });
-  }
+  loadPosts() {}
 }

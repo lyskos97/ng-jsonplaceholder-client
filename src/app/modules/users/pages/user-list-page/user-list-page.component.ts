@@ -17,6 +17,6 @@ export class UserListPageComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.userService.getUserList().subscribe(users => (this.users = users));
+    this.userService.getUsers().subscribe(users => (this.users = users));
   }
 }
