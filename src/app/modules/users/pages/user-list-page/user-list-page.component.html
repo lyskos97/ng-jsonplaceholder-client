@@ -2,7 +2,7 @@
   <h1 class="mat-display-1">Users <mat-icon>person</mat-icon></h1>
 
   <div fxLayout="row wrap" fxLayoutGap="3%">
-    <mat-card *ngFor="let user of users" fxFlex="47%" class="user-card">
+    <mat-card *ngFor="let user of users$ | async as users" fxFlex="47%" class="user-card">
       <mat-card-header>
         <mat-card-title-group>
           <mat-card-title

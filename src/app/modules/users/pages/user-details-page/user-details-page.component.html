@@ -1,4 +1,4 @@
-<div *ngIf="user$ | async as user">
+<div *ngIf="user">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ user.name }}</mat-card-title>
@@ -44,18 +44,11 @@
         <mat-expansion-panel-header>Albums</mat-expansion-panel-header>
 
         <ng-template matExpansionPanelContent>
-          <div
-            *ngIf="albums$ | async as albums"
-            fxLayout="row wrap"
-            fxLayoutGap="3%"
-          >
+          <div *ngIf="albums$ | async as albums" fxLayout="row wrap" fxLayoutGap="3%">
             <div *ngFor="let album of albums" fxFlex="47%">
               <a routerLink="/albums/{{ album.id }}">
                 <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
-                  <mat-card-content
-                    fxLayout
-                    fxLayoutAlign="space-between center"
-                  >
+                  <mat-card-content fxLayout fxLayoutAlign="space-between center">
                     <span class="mat-h2">{{ album.title }}</span>
                   </mat-card-content>
                 </mat-card>
@@ -69,25 +62,16 @@
         <mat-expansion-panel-header>Todos</mat-expansion-panel-header>
 
         <ng-template matExpansionPanelContent>
-          <div
-            *ngIf="todos$ | async as todos"
-            fxLayout="row wrap"
-            fxLayoutGap="3%"
-          >
+          <div *ngIf="todos$ | async as todos" fxLayout="row wrap" fxLayoutGap="3%">
             <div *ngFor="let todo of todos" fxFlex="47%">
               <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
                 <mat-card-title fxLayout fxLayoutAlign="space-between center">
                   <span class="mat-h2"
                     >{{ todo.title }}
-                    <mat-icon>{{
-                      todo.completed ? 'done_all' : 'close'
-                    }}</mat-icon></span
+                    <mat-icon>{{ todo.completed ? 'done_all' : 'close' }}</mat-icon></span
                   >
 
-                  <button
-                    mat-stroked-button
-                    (click)="todo.completed = !todo.completed"
-                  >
+                  <button mat-stroked-button (click)="todo.completed = !todo.completed">
                     {{ todo.completed ? 'Mark as undone' : 'Mark as done' }}
                   </button>
                 </mat-card-title>
