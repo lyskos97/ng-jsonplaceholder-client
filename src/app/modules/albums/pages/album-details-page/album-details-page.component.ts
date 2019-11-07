@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { IUser } from 'src/app/interfaces/models/user';
 import { IPhoto } from 'src/app/interfaces/models/photo';
 import { PhotoService } from 'src/app/services/photo.service';
+import { Title } from '@angular/platform-browser';
 
 interface AlbumWithUser extends IAlbum {
   user?: IUser;
@@ -24,7 +25,8 @@ export class AlbumDetailsPageComponent implements OnInit {
   constructor(
     private photoService: PhotoService,
     private albumService: AlbumService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private titleService: Title
   ) {
     this.albumId = this.route.snapshot.params['id'];
   }
@@ -43,6 +45,8 @@ export class AlbumDetailsPageComponent implements OnInit {
   loadAlbum() {
     this.albumService.getAlbum(this.albumId).subscribe(album => {
       this.album = album;
+
+      this.titleService.setTitle(`"${album.title}" Album - JSONPlaceholder Client`);
     });
   }
 }
