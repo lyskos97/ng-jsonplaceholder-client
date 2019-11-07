@@ -4,10 +4,10 @@ import { CommentListPageComponent } from './pages/comment-list-page/comment-list
 import { CommentDetailsPageComponent } from './pages/comment-details-page/comment-details-page.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: CommentListPageComponent
-  },
+  // {
+  //   path: '',
+  //   component: CommentListPageComponent
+  // },
   {
     path: ':id',
     component: CommentDetailsPageComponent
