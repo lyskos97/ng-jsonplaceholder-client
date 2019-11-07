@@ -2,7 +2,10 @@
   <mat-card>
     <div *ngIf="todo$ | async as todo">
       <mat-card-header>
-        <mat-card-subtitle>{{ todo.user.name }}</mat-card-subtitle>
+        <mat-card-subtitle>
+          by
+          <a routerLink="/users/{{ todo.user.id }}">{{ todo.user.name }}</a>
+        </mat-card-subtitle>
         <mat-card-title>
           <span>{{ todo.title }}</span>
         </mat-card-title>
