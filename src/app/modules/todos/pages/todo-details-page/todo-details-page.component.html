@@ -1,5 +1,14 @@
-<div class="container">
+<div class="container" fxLayout>
   <mat-card>
-    fak
+    <div *ngIf="todo$ | async as todo">
+      <mat-card-header>
+        <mat-card-subtitle>{{ todo.user.name }}</mat-card-subtitle>
+        <mat-card-title>
+          <span>{{ todo.title }}</span>
+        </mat-card-title>
+      </mat-card-header>
+
+      <button mat-stroked-button disabled>{{ todo.completed ? 'done' : 'undone' }}</button>
+    </div>
   </mat-card>
 </div>

@@ -12,7 +12,11 @@
       <mat-card-content>
         <mat-card class="todo" *ngFor="let todo of todoGroup.value.items">
           <mat-card-subtitle fxLayout fxLayoutAlign="space-between center">
-            <span class="mat-h2">{{ todo.title }} </span>
+            <span>
+              <span class="mat-h2"
+                ><a routerLink="/todos/{{ todo.id }}">{{ todo.title }}</a> </span
+              ><span class="mat-caption"> ID: {{ todo.id }}</span>
+            </span>
 
             <mat-icon>{{ todo.completed ? 'done' : 'close' }}</mat-icon>
           </mat-card-subtitle>

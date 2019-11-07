@@ -1,3 +1,13 @@
-.todo-group, .todo {
+.todo-group,
+.todo {
   margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  opacity: 0.7;
 }
