@@ -9,3 +9,12 @@ a:hover {
 a:hover * {
   opacity: 0.7;
 }
+
+.feed {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.post-card {
+  margin-bottom: 10px;
+}

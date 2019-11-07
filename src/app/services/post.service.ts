@@ -13,11 +13,6 @@ interface IFilters extends ISearchParams {
   userId?: number | string;
 }
 
-interface IPostWithAuhorAndComments extends IPost {
-  author: IUser;
-  comments: any[];
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +27,7 @@ export class PostService {
     return this.api.get<IPost[]>('/posts', params);
   }
 
-  getPost(id: number | string): Observable<IPostWithAuhorAndComments> {
+  getPost(id: number | string): Observable<IPost> {
     return this.api.get<IPost>(`/posts/${id}`).pipe(
       switchMap(post => {
         const user$ = this.userService.getUser(post.userId);
