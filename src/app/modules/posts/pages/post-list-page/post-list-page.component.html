@@ -28,7 +28,9 @@
             style="margin-bottom: 5px;"
           >
             <mat-card-content>
-              <p class="mat-body-2">{{ comment.name }}</p>
+              <p class="mat-body-2">
+                <a routerLink="/comments/{{ comment.id }}">{{ comment.name }}</a>
+              </p>
               <p class="mat-body-1">{{ comment.body }}</p>
             </mat-card-content>
 
