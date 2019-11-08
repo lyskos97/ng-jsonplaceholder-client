@@ -17,8 +17,10 @@ import {
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { PaginatorComponent } from 'src/app/components/paginator/paginator.component';
+
 @NgModule({
-  declarations: [],
+  declarations: [PaginatorComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -50,7 +52,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatGridListModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+
+    // declarations
+    PaginatorComponent
   ]
 })
 export class SharedModule {}
