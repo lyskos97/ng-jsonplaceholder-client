@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ISearchParams } from '../interfaces/utility/pagination';
 import { IUser } from '../interfaces/models/user';
 import { ApiService } from './api.service';
+import { asyncDataObservable } from '../utils/async-data-observable';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,6 @@ export class UserService {
   }
 
   getUser(id: number | string) {
-    return this.api.get<IUser>(`/users/${id}`);
+    return asyncDataObservable(this.api.get<IUser>(`/users/${id}`));
   }
 }

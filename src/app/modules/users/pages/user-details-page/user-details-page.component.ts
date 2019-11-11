@@ -6,6 +6,7 @@ import { TodoService } from 'src/app/services/todo.service';
 import { AlbumService } from 'src/app/services/album.service';
 import { IUser } from 'src/app/interfaces/models/user';
 import { Title } from '@angular/platform-browser';
+import { IAsyncDataStatus } from 'src/app/utils/async-data-observable';
 
 @Component({
   selector: 'app-user-details-page',
@@ -15,7 +16,7 @@ import { Title } from '@angular/platform-browser';
 export class UserDetailsPageComponent implements OnInit {
   userId = this.route.snapshot.params['id'];
 
-  user: IUser;
+  user: IAsyncDataStatus<IUser>;
   posts$ = this.postService.getPosts({ userId: this.userId });
   todos$ = this.todoService.getTodos({ userId: this.userId });
   albums$ = this.albumService.getAlbums({ userId: this.userId });
@@ -33,7 +34,9 @@ export class UserDetailsPageComponent implements OnInit {
     this.userService.getUser(this.userId).subscribe(user => {
       this.user = user;
 
-      this.titleService.setTitle(user.name + ' Profile page - JSONPlaceholder Client');
+      if (this.user.data) {
+        this.titleService.setTitle(user.data.name + "'s Profile page - JSONPlaceholder Client");
+      }
     });
   }
 }

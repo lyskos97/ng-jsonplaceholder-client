@@ -1,85 +1,95 @@
-<div *ngIf="user">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{ user.name }}</mat-card-title>
-      <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
-      <mat-card-subtitle>{{ user.username }}</mat-card-subtitle>
-    </mat-card-header>
-
-    <mat-card-content fxLayout="row wrap" fxLayoutGap="2%">
-      <div fxFlex="48%">
-        <app-user-address-card [address]="user.address"></app-user-address-card>
-      </div>
-
-      <div fxFlex="48%">
-        <app-user-company-card [company]="user.company"></app-user-company-card>
-      </div>
-    </mat-card-content>
-
-    <mat-card-content>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>Posts</mat-expansion-panel-header>
-
-        <ng-template matExpansionPanelContent>
-          <div *ngIf="posts$ | async as posts">
-            <div *ngFor="let post of posts">
-              <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
-                <mat-card-title>
-                  <span class="mat-h2">{{ post.title }}</span>
-                </mat-card-title>
-                <mat-card-content>{{ post.body }}</mat-card-content>
-                <mat-divider></mat-divider>
-                <mat-card-actions fxLayout fxLayoutAlign="end">
-                  <a mat-stroked-button routerLink="/posts/{{ post.id }}"
-                    >Go to the post <mat-icon>chevron_right</mat-icon></a
-                  >
-                </mat-card-actions>
-              </mat-card>
-            </div>
-          </div>
-        </ng-template>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>Albums</mat-expansion-panel-header>
-
-        <ng-template matExpansionPanelContent>
-          <div *ngIf="albums$ | async as albums" fxLayout="row wrap" fxLayoutGap="3%">
-            <div *ngFor="let album of albums" fxFlex="47%">
-              <a routerLink="/albums/{{ album.id }}">
-                <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
-                  <mat-card-content fxLayout fxLayoutAlign="space-between center">
-                    <span class="mat-h2">{{ album.title }}</span>
-                  </mat-card-content>
-                </mat-card>
-              </a>
-            </div>
-          </div>
-        </ng-template>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>Todos</mat-expansion-panel-header>
-
-        <ng-template matExpansionPanelContent>
-          <div *ngIf="todos$ | async as todos" fxLayout="row wrap" fxLayoutGap="3%">
-            <div *ngFor="let todo of todos" fxFlex="47%">
-              <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
-                <mat-card-title fxLayout fxLayoutAlign="space-between center">
-                  <span class="mat-h2"
-                    >{{ todo.title }}
-                    <mat-icon>{{ todo.completed ? 'done_all' : 'close' }}</mat-icon></span
-                  >
-
-                  <button mat-stroked-button (click)="todo.completed = !todo.completed">
-                    {{ todo.completed ? 'Mark as undone' : 'Mark as done' }}
-                  </button>
-                </mat-card-title>
-              </mat-card>
-            </div>
-          </div>
-        </ng-template>
-      </mat-expansion-panel>
-    </mat-card-content>
+<div>
+  <mat-card *ngIf="user.loading; else userLoaded">
+    <mat-spinner [diameter]="50"></mat-spinner>
   </mat-card>
+
+  <ng-template #userLoaded>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ user.data.name }}</mat-card-title>
+        <mat-card-subtitle>{{ user.data.email }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ user.data.username }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content fxLayout="row wrap" fxLayoutGap="2%">
+        <div fxFlex="48%">
+          <app-user-address-card [address]="user.data.address"></app-user-address-card>
+        </div>
+
+        <div fxFlex="48%">
+          <app-user-company-card [company]="user.data.company"></app-user-company-card>
+        </div>
+      </mat-card-content>
+
+      <mat-card-content>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>Posts</mat-expansion-panel-header>
+
+          <ng-template matExpansionPanelContent>
+            <div *ngIf="posts$ | async as posts">
+              <mat-card *ngIf="posts.loading; else postsLoaded" fxLayoutAlign="center">
+                <mat-spinner [diameter]="50"></mat-spinner>
+              </mat-card>
+
+              <div #postsLoaded *ngFor="let post of posts.data">
+                <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
+                  <mat-card-title>
+                    <span class="mat-h2">{{ post.title }}</span>
+                  </mat-card-title>
+                  <mat-card-content>{{ post.body }}</mat-card-content>
+                  <mat-divider></mat-divider>
+                  <mat-card-actions fxLayout fxLayoutAlign="end">
+                    <a mat-stroked-button routerLink="/posts/{{ post.id }}"
+                      >Go to the post <mat-icon>chevron_right</mat-icon></a
+                    >
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+            </div>
+          </ng-template>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>Albums</mat-expansion-panel-header>
+
+          <ng-template matExpansionPanelContent>
+            <div *ngIf="albums$ | async as albums" fxLayout="row wrap" fxLayoutGap="3%">
+              <div *ngFor="let album of albums" fxFlex="47%">
+                <a routerLink="/albums/{{ album.id }}">
+                  <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
+                    <mat-card-content fxLayout fxLayoutAlign="space-between center">
+                      <span class="mat-h2">{{ album.title }}</span>
+                    </mat-card-content>
+                  </mat-card>
+                </a>
+              </div>
+            </div>
+          </ng-template>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>Todos</mat-expansion-panel-header>
+
+          <ng-template matExpansionPanelContent>
+            <div *ngIf="todos$ | async as todos" fxLayout="row wrap" fxLayoutGap="3%">
+              <div *ngFor="let todo of todos" fxFlex="47%">
+                <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
+                  <mat-card-title fxLayout fxLayoutAlign="space-between center">
+                    <span class="mat-h2"
+                      >{{ todo.title }}
+                      <mat-icon>{{ todo.completed ? 'done_all' : 'close' }}</mat-icon></span
+                    >
+
+                    <button mat-stroked-button (click)="todo.completed = !todo.completed">
+                      {{ todo.completed ? 'Mark as undone' : 'Mark as done' }}
+                    </button>
+                  </mat-card-title>
+                </mat-card>
+              </div>
+            </div>
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
 </div>
