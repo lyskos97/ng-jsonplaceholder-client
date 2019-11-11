@@ -17,6 +17,8 @@ interface IFilters extends ISearchParams {
   providedIn: 'root'
 })
 export class PostService {
+  TOTAL_POSTS = 100;
+
   constructor(
     private api: ApiService,
     private userService: UserService,

@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="posts$ | async as posts" class="feed">
+  <div *ngIf="posts" class="feed">
     <h1 class="mat-display-1">Posts <mat-icon>rss_feed</mat-icon></h1>
 
     <mat-card *ngFor="let post of posts" class="post-card">
@@ -12,7 +12,9 @@
       <div>
         <button
           mat-stroked-button
-          (click)="post.comments$ = loadComments(post.id); post.showComments = !post.showComments"
+          (click)="
+            post.comments$ = createCommentLoader(post.id); post.showComments = !post.showComments
+          "
         >
           {{ post.showComments ? 'Hide comments' : 'Show comments' }}
         </button>
@@ -35,11 +37,19 @@
             </mat-card-content>
 
             <mat-card-subtitle>
-              <span class="mat-caption">by {{ comment.email }}</span>
+              <span class="mat-caption">by {{ comment.email }}</span
+              >ng
             </mat-card-subtitle>
           </mat-card>
         </div>
       </div>
     </mat-card>
+
+    <app-paginator
+      [currentPage]="page"
+      [totalPages]="totalPages"
+      [visiblePages]="5"
+      (pageChange)="handlePageChange($event)"
+    ></app-paginator>
   </div>
 </div>

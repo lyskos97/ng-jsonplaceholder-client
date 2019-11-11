@@ -6,18 +6,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./paginator.component.css']
 })
 export class PaginatorComponent implements OnInit {
-  @Input() totalPages: number = 15;
+  @Input() totalPages: number = 1;
   @Input() currentPage: number = 1;
   @Input() visiblePages: number = 7;
 
-  @Output() pageChanged = new EventEmitter<number>();
+  @Output() pageChange = new EventEmitter<number>();
 
   constructor() {}
 
   ngOnInit() {}
 
   handlePageChange(nextPage) {
-    this.pageChanged.emit(nextPage);
+    this.pageChange.emit(nextPage);
   }
 
   get hasNextPage(): boolean {
@@ -70,5 +70,10 @@ export class PaginatorComponent implements OnInit {
     const margin = this.currentPage + Math.floor(this.visiblePages / 2);
 
     return this.totalPages > margin;
+  }
+
+  changePage(page) {
+    this.currentPage = page;
+    this.pageChange.emit(page);
   }
 }

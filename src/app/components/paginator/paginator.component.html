@@ -3,12 +3,7 @@
     <mat-icon>chevron_left</mat-icon>
   </button>
 
-  <button
-    *ngIf="leftCollapsed"
-    mat-mini-fab
-    (click)="currentPage = 1"
-    [disabled]="1 === currentPage"
-  >
+  <button *ngIf="leftCollapsed" mat-mini-fab (click)="changePage(1)" [disabled]="1 === currentPage">
     1
   </button>
 
@@ -17,7 +12,7 @@
   <button
     mat-mini-fab
     *ngFor="let page of pages"
-    (click)="currentPage = page"
+    (click)="changePage(page)"
     [disabled]="page === currentPage"
   >
     {{ page }}
@@ -28,7 +23,7 @@
   <button
     *ngIf="rightCollapsed"
     mat-mini-fab
-    (click)="currentPage = totalPages"
+    (click)="changePage(totalPages)"
     [disabled]="totalPages === currentPage"
   >
     {{ totalPages }}
