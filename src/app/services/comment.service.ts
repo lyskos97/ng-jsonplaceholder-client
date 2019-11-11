@@ -7,6 +7,7 @@ import { IPost } from '../interfaces/models/post';
 import { PostService } from './post.service';
 import { switchMap, map } from 'rxjs/operators';
 import { IUser } from '../interfaces/models/user';
+import { IAsyncDataStatus, asyncDataObservable } from '../utils/async-data-observable';
 
 interface ICommentSearchParams extends ISearchParams {
   postId: number | string;
@@ -26,8 +27,8 @@ interface IPostWithAuthor extends IPost {
 export class CommentService {
   constructor(private api: ApiService) {}
 
-  getComments(params: ICommentSearchParams): Observable<IComment[]> {
-    return this.api.get<IComment[]>('/comments', params);
+  getComments(params: ICommentSearchParams): Observable<IAsyncDataStatus<IComment[]>> {
+    return asyncDataObservable(this.api.get<IComment[]>('/comments', params));
   }
 
   getComment(id: number | string): Observable<ICommentWithPost> {

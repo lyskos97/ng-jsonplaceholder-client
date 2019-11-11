@@ -9,7 +9,7 @@ import { IAsyncDataStatus } from 'src/app/utils/async-data-observable';
 
 interface IPost_extended extends IPost {
   showComments?: boolean;
-  comments$?: Observable<IPost[]>;
+  comments$?: Observable<IAsyncDataStatus<IPost[]>>;
 }
 
 @Component({
