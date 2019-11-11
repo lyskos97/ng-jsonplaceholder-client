@@ -8,7 +8,7 @@ import { UserService } from './user.service';
 import { IUser } from '../interfaces/models/user';
 
 interface IFilters extends ISearchParams {
-  userId: number | string;
+  userId?: number | string;
 }
 
 interface IAlbumWithAuthor extends IAlbum {
@@ -19,6 +19,8 @@ interface IAlbumWithAuthor extends IAlbum {
   providedIn: 'root'
 })
 export class AlbumService {
+  readonly TOTAL_ALBUMS = 100;
+
   constructor(private api: ApiService, private userService: UserService) {}
 
   getAlbums(params?: IFilters) {
@@ -30,9 +32,7 @@ export class AlbumService {
       .get<IAlbum>(`/albums/${id}`)
       .pipe(
         switchMap(album =>
-          this.userService
-            .getUser(album.userId)
-            .pipe(map(user => ({ ...album, user })))
+          this.userService.getUser(album.userId).pipe(map(user => ({ ...album, user })))
         )
       );
   }
