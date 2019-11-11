@@ -13,7 +13,8 @@ import {
   MatGridListModule,
   MatInputModule,
   MatFormFieldModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -35,7 +36,8 @@ import { PaginatorComponent } from 'src/app/components/paginator/paginator.compo
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     FlexLayoutModule,
@@ -53,6 +55,7 @@ import { PaginatorComponent } from 'src/app/components/paginator/paginator.compo
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
 
     // declarations
     PaginatorComponent

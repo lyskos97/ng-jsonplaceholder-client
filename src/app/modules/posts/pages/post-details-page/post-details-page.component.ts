@@ -3,6 +3,7 @@ import { PostService } from 'src/app/services/post.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { IPost } from 'src/app/interfaces/models/post';
+import { IAsyncDataStatus } from 'src/app/utils/async-data-observable';
 
 @Component({
   selector: 'app-post-details-page',
@@ -11,7 +12,7 @@ import { IPost } from 'src/app/interfaces/models/post';
 })
 export class PostDetailsPageComponent implements OnInit {
   postId = this.route.snapshot.params['id'];
-  post: IPost;
+  post: IAsyncDataStatus<IPost>;
 
   constructor(
     private postService: PostService,
@@ -23,7 +24,9 @@ export class PostDetailsPageComponent implements OnInit {
     this.postService.getPost(this.postId).subscribe(post => {
       this.post = post;
 
-      this.titleService.setTitle(post.title);
+      if (post.data) {
+        this.titleService.setTitle(post.data.title);
+      }
     });
   }
 }
