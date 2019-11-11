@@ -17,8 +17,8 @@ interface ITodoSearchParams extends ISearchParams {
 export class TodoService {
   constructor(private api: ApiService) {}
 
-  getTodos(params?: ITodoSearchParams): Observable<ITodo[]> {
-    return this.api.get<ITodo[]>(`/todos`, params);
+  getTodos(params?: ITodoSearchParams): Observable<IAsyncDataStatus<ITodo[]>> {
+    return asyncDataObservable(this.api.get<ITodo[]>(`/todos`, params));
   }
 
   getTodo(id: number | string): Observable<IAsyncDataStatus<ITodo>> {

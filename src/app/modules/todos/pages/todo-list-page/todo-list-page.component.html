@@ -1,27 +1,33 @@
 <div class="container">
   <h1 class="mat-display-1">Todos <mat-icon>done_all</mat-icon></h1>
 
-  <div fxLayout="row wrap" fxLayoutGap="2%">
-    <mat-card *ngFor="let todoGroup of todosByUsers | keyvalue" fxFlex="31%" class="todo-group">
-      <mat-card-title>
-        <span
-          >by <a routerLink="/users/{{ todoGroup.key }}">user #{{ todoGroup.key }}</a></span
-        >
-      </mat-card-title>
+  <mat-card *ngIf="todos.loading; else todosLoaded" fxLayoutAlign="center">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </mat-card>
 
-      <mat-card-content>
-        <mat-card class="todo" *ngFor="let todo of todoGroup.value.items">
-          <mat-card-subtitle fxLayout fxLayoutAlign="space-between center">
-            <span>
-              <span class="mat-h2"
-                ><a routerLink="/todos/{{ todo.id }}">{{ todo.title }}</a> </span
-              ><span class="mat-caption"> ID: {{ todo.id }}</span>
-            </span>
+  <ng-template #todosLoaded>
+    <div fxLayout="row wrap" fxLayoutGap="2%">
+      <mat-card *ngFor="let todoGroup of todosByUsers | keyvalue" fxFlex="31%" class="todo-group">
+        <mat-card-title>
+          <span
+            >by <a routerLink="/users/{{ todoGroup.key }}">user #{{ todoGroup.key }}</a></span
+          >
+        </mat-card-title>
 
-            <mat-icon>{{ todo.completed ? 'done' : 'close' }}</mat-icon>
-          </mat-card-subtitle>
-        </mat-card>
-      </mat-card-content>
-    </mat-card>
-  </div>
+        <mat-card-content>
+          <mat-card class="todo" *ngFor="let todo of todoGroup.value.items">
+            <mat-card-subtitle fxLayout fxLayoutAlign="space-between center">
+              <span>
+                <span class="mat-h2"
+                  ><a routerLink="/todos/{{ todo.id }}">{{ todo.title }}</a> </span
+                ><span class="mat-caption"> ID: {{ todo.id }}</span>
+              </span>
+
+              <mat-icon>{{ todo.completed ? 'done' : 'close' }}</mat-icon>
+            </mat-card-subtitle>
+          </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-template>
 </div>

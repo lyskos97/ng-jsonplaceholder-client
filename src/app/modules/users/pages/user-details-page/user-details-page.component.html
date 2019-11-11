@@ -78,20 +78,26 @@
 
           <ng-template matExpansionPanelContent>
             <div *ngIf="todos$ | async as todos" fxLayout="row wrap" fxLayoutGap="3%">
-              <div *ngFor="let todo of todos" fxFlex="47%">
-                <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
-                  <mat-card-title fxLayout fxLayoutAlign="space-between center">
-                    <span class="mat-h2"
-                      >{{ todo.title }}
-                      <mat-icon>{{ todo.completed ? 'done_all' : 'close' }}</mat-icon></span
-                    >
+              <mat-card *ngIf="todos.loading; else todosLoaded" fxLayoutAlign="center">
+                <mat-spinner [diameter]="50"></mat-spinner>
+              </mat-card>
 
-                    <button mat-stroked-button (click)="todo.completed = !todo.completed">
-                      {{ todo.completed ? 'Mark as undone' : 'Mark as done' }}
-                    </button>
-                  </mat-card-title>
-                </mat-card>
-              </div>
+              <ng-template #todosLoaded>
+                <div *ngFor="let todo of todos.data" fxFlex="47%">
+                  <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
+                    <mat-card-title fxLayout fxLayoutAlign="space-between center">
+                      <span class="mat-h2"
+                        >{{ todo.title }}
+                        <mat-icon>{{ todo.completed ? 'done_all' : 'close' }}</mat-icon></span
+                      >
+
+                      <button mat-stroked-button (click)="todo.completed = !todo.completed">
+                        {{ todo.completed ? 'Mark as undone' : 'Mark as done' }}
+                      </button>
+                    </mat-card-title>
+                  </mat-card>
+                </div>
+              </ng-template>
             </div>
           </ng-template>
         </mat-expansion-panel>
