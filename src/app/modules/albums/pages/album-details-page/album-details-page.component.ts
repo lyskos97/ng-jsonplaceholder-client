@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AlbumService } from 'src/app/services/album.service';
 import { IAlbum } from 'src/app/interfaces/models/album';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 import { IUser } from 'src/app/interfaces/models/user';
 import { IPhoto } from 'src/app/interfaces/models/photo';
 import { PhotoService } from 'src/app/services/photo.service';
 import { Title } from '@angular/platform-browser';
+import { IAsyncDataStatus } from 'src/app/utils/async-data-observable';
 
 interface AlbumWithUser extends IAlbum {
   user?: IUser;
@@ -19,7 +19,7 @@ interface AlbumWithUser extends IAlbum {
 })
 export class AlbumDetailsPageComponent implements OnInit {
   albumId: string;
-  album: AlbumWithUser;
+  album: IAsyncDataStatus<AlbumWithUser>;
   photos: IPhoto[] = [];
 
   constructor(
@@ -46,7 +46,9 @@ export class AlbumDetailsPageComponent implements OnInit {
     this.albumService.getAlbum(this.albumId).subscribe(album => {
       this.album = album;
 
-      this.titleService.setTitle(`"${album.title}" Album - JSONPlaceholder Client`);
+      if (album.data) {
+        this.titleService.setTitle(`"${album.data.title}" Album - JSONPlaceholder Client`);
+      }
     });
   }
 }

@@ -1,24 +1,30 @@
 <div class="container">
-  <mat-card *ngIf="album">
-    <mat-card-header>
-      <mat-card-title>{{ album.title }}</mat-card-title>
-      <mat-card-subtitle *ngIf="album.user">
-        <a routerLink="/users/{{ album.user.id }}">{{ album.user.name }}</a>
-      </mat-card-subtitle>
-    </mat-card-header>
-
-    <mat-card-content>
-      <mat-card class="mat-elevation-z7">
-        <mat-grid-list cols="4" rowHeight="1:1" gutterSize="25">
-          <mat-grid-tile *ngFor="let p of photos">
-            <a routerLink="/photos/{{ p.id }}">
-              <img [src]="p.url" [alt]="p.title" />
-            </a>
-
-            <mat-grid-tile-footer>{{ p.title }}</mat-grid-tile-footer>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </mat-card>
-    </mat-card-content>
+  <mat-card *ngIf="album.loading; else albumLoaded" fxLayoutAlign="center">
+    <mat-spinner [diameter]="50"></mat-spinner>
   </mat-card>
+
+  <ng-template #albumLoaded>
+    <mat-card *ngIf="album">
+      <mat-card-header>
+        <mat-card-title>{{ album.data.title }}</mat-card-title>
+        <mat-card-subtitle *ngIf="album.data.user">
+          <a routerLink="/users/{{ album.data.user.id }}">{{ album.data.user.name }}</a>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-card class="mat-elevation-z7">
+          <mat-grid-list cols="4" rowHeight="1:1" gutterSize="25">
+            <mat-grid-tile *ngFor="let p of photos">
+              <a routerLink="/photos/{{ p.id }}">
+                <img [src]="p.url" [alt]="p.title" />
+              </a>
+
+              <mat-grid-tile-footer>{{ p.title }}</mat-grid-tile-footer>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
 </div>
