@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { ISearchParams } from '../interfaces/utility/pagination';
 import { IPhoto } from '../interfaces/models/photo';
-import { AlbumService } from './album.service';
 import { switchMap, map } from 'rxjs/operators';
 import { IAlbum } from '../interfaces/models/album';
 import { IUser } from '../interfaces/models/user';
@@ -12,28 +11,22 @@ interface IParams extends ISearchParams {
   albumId?: number | string;
 }
 
-interface IPhotoWithAlbum extends IPhoto {
-  album: IAlbum & { user: IUser };
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class PhotoService {
-  constructor(private api: ApiService, private albumService: AlbumService) {}
+  constructor(private api: ApiService) {}
 
   getPhotos(params?: IParams) {
     return this.api.get<IPhoto[]>('/photos', params);
   }
 
-  getPhoto(id: number | string): Observable<IPhotoWithAlbum> {
+  getPhoto(id: number | string): Observable<IPhoto> {
     return this.api
       .get<IPhoto>(`/photos/${id}`)
       .pipe(
         switchMap(photo =>
-          this.albumService
-            .getAlbum(photo.albumId)
-            .pipe(map(album => ({ ...photo, album })))
+          this.api.get<IAlbum>(`/albums/${photo.albumId}`).pipe(map(album => ({ ...photo, album })))
         )
       );
   }
