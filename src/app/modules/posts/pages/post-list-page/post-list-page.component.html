@@ -6,54 +6,59 @@
       <mat-spinner [diameter]="50"></mat-spinner>
     </mat-card>
 
-    <mat-card #loaded *ngFor="let post of posts.data" class="post-card">
-      <a routerLink="/posts/{{ post.id }}">
-        <mat-card-title>{{ post.title }}</mat-card-title>
-      </a>
+    <ng-template #loaded>
+      <mat-card *ngFor="let post of posts.data" class="post-card">
+        <a routerLink="/posts/{{ post.id }}">
+          <mat-card-title>{{ post.title }}</mat-card-title>
+        </a>
 
-      <mat-card-content>{{ post.body }}</mat-card-content>
+        <mat-card-content>{{ post.body }}</mat-card-content>
 
-      <div>
-        <button
-          mat-stroked-button
-          (click)="
-            post.comments$ = createCommentLoader(post.id); post.showComments = !post.showComments
-          "
-        >
-          {{ post.showComments ? 'Hide comments' : 'Show comments' }}
-        </button>
+        <div>
+          <button
+            mat-stroked-button
+            (click)="
+              post.comments$ = createCommentLoader(post.id); post.showComments = !post.showComments
+            "
+          >
+            {{ post.showComments ? 'Hide comments' : 'Show comments' }}
+          </button>
 
-        <div *ngIf="post.showComments && post.comments$ | async as comments" style="padding: 5px;">
-          <mat-divider></mat-divider>
+          <div
+            *ngIf="post.showComments && post.comments$ | async as comments"
+            style="padding: 5px;"
+          >
+            <mat-divider></mat-divider>
 
-          <h4 class="mat-h3" style="margin-top: 10px;">Comments</h4>
+            <h4 class="mat-h3" style="margin-top: 10px;">Comments</h4>
 
-          <mat-card *ngIf="comments.loading; else commentsLoaded" fxLayoutAlign="center">
-            <mat-spinner [diameter]="50"></mat-spinner>
-          </mat-card>
-
-          <ng-template #commentsLoaded>
-            <mat-card
-              *ngFor="let comment of comments.data"
-              class="mat-elevation-z3"
-              style="margin-bottom: 5px;"
-            >
-              <mat-card-content>
-                <p class="mat-body-2">
-                  <a routerLink="/comments/{{ comment.id }}">{{ comment.name }}</a>
-                </p>
-                <p class="mat-body-1">{{ comment.body }}</p>
-              </mat-card-content>
-
-              <mat-card-subtitle>
-                <span class="mat-caption">by {{ comment.email }}</span
-                >ng
-              </mat-card-subtitle>
+            <mat-card *ngIf="comments.loading; else commentsLoaded" fxLayoutAlign="center">
+              <mat-spinner [diameter]="50"></mat-spinner>
             </mat-card>
-          </ng-template>
+
+            <ng-template #commentsLoaded>
+              <mat-card
+                *ngFor="let comment of comments.data"
+                class="mat-elevation-z3"
+                style="margin-bottom: 5px;"
+              >
+                <mat-card-content>
+                  <p class="mat-body-2">
+                    <a routerLink="/comments/{{ comment.id }}">{{ comment.name }}</a>
+                  </p>
+                  <p class="mat-body-1">{{ comment.body }}</p>
+                </mat-card-content>
+
+                <mat-card-subtitle>
+                  <span class="mat-caption">by {{ comment.email }}</span
+                  >ng
+                </mat-card-subtitle>
+              </mat-card>
+            </ng-template>
+          </div>
         </div>
-      </div>
-    </mat-card>
+      </mat-card>
+    </ng-template>
 
     <app-paginator
       [currentPage]="page"
