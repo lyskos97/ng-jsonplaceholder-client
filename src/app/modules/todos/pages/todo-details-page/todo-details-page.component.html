@@ -1,17 +1,23 @@
 <div class="container" fxLayout>
-  <mat-card>
-    <div *ngIf="todo$ | async as todo">
-      <mat-card-header>
-        <mat-card-subtitle>
-          by
-          <a routerLink="/users/{{ todo.user.id }}">{{ todo.user.name }}</a>
-        </mat-card-subtitle>
-        <mat-card-title>
-          <span>{{ todo.title }}</span>
-        </mat-card-title>
-      </mat-card-header>
-
-      <button mat-stroked-button disabled>{{ todo.completed ? 'done' : 'undone' }}</button>
-    </div>
+  <mat-card *ngIf="todo.loading; else todoLoaded" fxLayoutAlign="center">
+    <mat-spinner [diameter]="50"></mat-spinner>
   </mat-card>
+
+  <ng-template #todoLoaded>
+    <mat-card>
+      <div *ngIf="todo.data">
+        <mat-card-header>
+          <mat-card-subtitle>
+            by
+            <a routerLink="/users/{{ todo.data.user.id }}">{{ todo.data.user.name }}</a>
+          </mat-card-subtitle>
+          <mat-card-title>
+            <span>{{ todo.data.title }}</span>
+          </mat-card-title>
+        </mat-card-header>
+
+        <button mat-stroked-button disabled>{{ todo.data.completed ? 'done' : 'undone' }}</button>
+      </div>
+    </mat-card>
+  </ng-template>
 </div>

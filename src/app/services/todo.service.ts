@@ -5,13 +5,10 @@ import { Observable } from 'rxjs';
 import { ITodo } from '../interfaces/models/todo';
 import { IUser } from '../interfaces/models/user';
 import { switchMap, map } from 'rxjs/operators';
+import { IAsyncDataStatus, asyncDataObservable } from '../utils/async-data-observable';
 
 interface ITodoSearchParams extends ISearchParams {
   userId?: number | string;
-}
-
-interface ITodoWithUser extends ITodo {
-  user: IUser;
 }
 
 @Injectable({
@@ -24,13 +21,15 @@ export class TodoService {
     return this.api.get<ITodo[]>(`/todos`, params);
   }
 
-  getTodo(id: number | string): Observable<ITodoWithUser> {
-    return this.api
-      .get<ITodo>(`/todos/${id}`)
-      .pipe(
-        switchMap(todo =>
-          this.api.get<IUser>(`/users/${id}`).pipe(map(user => ({ ...todo, user })))
+  getTodo(id: number | string): Observable<IAsyncDataStatus<ITodo>> {
+    return asyncDataObservable(
+      this.api
+        .get<ITodo>(`/todos/${id}`)
+        .pipe(
+          switchMap(todo =>
+            this.api.get<IUser>(`/users/${todo.userId}`).pipe(map(user => ({ ...todo, user })))
+          )
         )
-      );
+    );
   }
 }
