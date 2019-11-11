@@ -2,7 +2,7 @@
   <h1 class="mat-display-1">Photos</h1>
 
   <mat-card class="mat-elevation-z7">
-    <mat-grid-list *ngIf="photos$ | async as photos" cols="4" rowHeight="1:1" gutterSize="25">
+    <mat-grid-list *ngIf="photos" cols="4" rowHeight="1:1" gutterSize="25">
       <mat-grid-tile *ngFor="let p of photos">
         <a routerLink="/photos/{{ p.id }}">
           <img [src]="p.url" [alt]="p.title" />
@@ -13,5 +13,11 @@
         </mat-grid-tile-footer>
       </mat-grid-tile>
     </mat-grid-list>
+
+    <mat-card-actions *ngIf="hasNextPage">
+      <div style="text-align: center; padding: 15px 0 5px;">
+        <button mat-stroked-button (click)="page = page + 1; loadPageAndAppend()">Load more</button>
+      </div>
+    </mat-card-actions>
   </mat-card>
 </div>

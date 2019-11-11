@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div *ngIf="!hasNextPage" fxLayout fxLayoutAlign="center center">
+  <div *ngIf="hasNextPage" fxLayout fxLayoutAlign="center center">
     <button mat-stroked-button (click)="loadNextPageAndAppend()">Load more</button>
   </div>
 </div>

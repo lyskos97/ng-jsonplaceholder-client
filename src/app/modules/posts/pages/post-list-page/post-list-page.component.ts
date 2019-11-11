@@ -35,7 +35,7 @@ export class PostListPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('Posts');
+    this.titleService.setTitle('Posts - JSONPlaceholder Client');
 
     this.fetchPostsOnPageChange();
   }
