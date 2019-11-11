@@ -9,6 +9,7 @@ export class PaginatorComponent implements OnInit {
   @Input() totalPages: number = 1;
   @Input() currentPage: number = 1;
   @Input() visiblePages: number = 7;
+  @Input() disabled: boolean = false;
 
   @Output() pageChange = new EventEmitter<number>();
 

@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { IPost } from 'src/app/interfaces/models/post';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { IAsyncDataStatus } from 'src/app/utils/async-data-observable';
 
 interface IPost_extended extends IPost {
   showComments?: boolean;
@@ -20,7 +21,7 @@ export class PostListPageComponent implements OnInit {
   PAGE_SIZE = 10;
 
   page: number;
-  posts: IPost_extended[] = [];
+  posts: IAsyncDataStatus<IPost_extended[]>;
 
   constructor(
     private postService: PostService,

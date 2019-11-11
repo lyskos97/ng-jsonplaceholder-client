@@ -5,3 +5,8 @@
 .comment {
   margin-bottom: 10px;
 }
+
+.post {
+  max-width: 1000px;
+  margin: 0 auto;
+}

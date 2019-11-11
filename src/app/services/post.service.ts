@@ -20,8 +20,8 @@ export class PostService {
 
   constructor(private api: ApiService) {}
 
-  getPosts(params: IFilters) {
-    return this.api.get<IPost[]>('/posts', params);
+  getPosts(params: IFilters): Observable<IAsyncDataStatus<IPost[]>> {
+    return asyncDataObservable(this.api.get<IPost[]>('/posts', params));
   }
 
   getPost(id: number | string): Observable<IAsyncDataStatus<IPost>> {

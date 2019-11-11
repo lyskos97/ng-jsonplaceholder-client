@@ -1,9 +1,9 @@
 <div class="paginator" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
-  <button mat-mini-fab [disabled]="!hasPreviousPage" (click)="currentPage = currentPage - 1">
+  <button mat-mini-fab [disabled]="disabled || !hasPreviousPage" (click)="changePage(currentPage - 1)">
     <mat-icon>chevron_left</mat-icon>
   </button>
 
-  <button *ngIf="leftCollapsed" mat-mini-fab (click)="changePage(1)" [disabled]="1 === currentPage">
+  <button *ngIf="leftCollapsed" mat-mini-fab (click)="changePage(1)" [disabled]="disabled || 1 === currentPage">
     1
   </button>
 
@@ -13,7 +13,7 @@
     mat-mini-fab
     *ngFor="let page of pages"
     (click)="changePage(page)"
-    [disabled]="page === currentPage"
+    [disabled]="disabled || page === currentPage"
   >
     {{ page }}
   </button>
@@ -24,12 +24,12 @@
     *ngIf="rightCollapsed"
     mat-mini-fab
     (click)="changePage(totalPages)"
-    [disabled]="totalPages === currentPage"
+    [disabled]="disabled || totalPages === currentPage"
   >
     {{ totalPages }}
   </button>
 
-  <button mat-mini-fab [disabled]="!hasNextPage" (click)="currentPage = currentPage + 1">
+  <button mat-mini-fab [disabled]="disabled || !hasNextPage" (click)="changePage(currentPage + 1)">
     <mat-icon>chevron_right</mat-icon>
   </button>
 </div>
