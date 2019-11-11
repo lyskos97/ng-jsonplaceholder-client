@@ -54,15 +54,21 @@
 
           <ng-template matExpansionPanelContent>
             <div *ngIf="albums$ | async as albums" fxLayout="row wrap" fxLayoutGap="3%">
-              <div *ngFor="let album of albums" fxFlex="47%">
-                <a routerLink="/albums/{{ album.id }}">
-                  <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
-                    <mat-card-content fxLayout fxLayoutAlign="space-between center">
-                      <span class="mat-h2">{{ album.title }}</span>
-                    </mat-card-content>
-                  </mat-card>
-                </a>
-              </div>
+              <mat-card *ngIf="albums.loading; else albumsLoaded" fxLayoutAlign="center">
+                <mat-spinner [diameter]="50"></mat-spinner>
+              </mat-card>
+
+              <ng-template #albumsLoaded>
+                <div *ngFor="let album of albums.data" fxFlex="47%">
+                  <a routerLink="/albums/{{ album.id }}">
+                    <mat-card class="mat-elevation-z3" style="margin-bottom: 10px;">
+                      <mat-card-content fxLayout fxLayoutAlign="space-between center">
+                        <span class="mat-h2">{{ album.title }}</span>
+                      </mat-card-content>
+                    </mat-card>
+                  </a>
+                </div>
+              </ng-template>
             </div>
           </ng-template>
         </mat-expansion-panel>

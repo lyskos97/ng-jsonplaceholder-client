@@ -2,7 +2,7 @@
   <h1 class="mat-display-1">Albums <mat-icon>photo_library</mat-icon></h1>
 
   <div fxLayout="row wrap" fxLayoutGap="3%">
-    <div *ngFor="let album of albums" fxFlex="30%">
+    <div *ngFor="let album of albums.data" fxFlex="30%">
       <mat-card style="margin-bottom: 10px;">
         <mat-card-title>{{ album.title }}</mat-card-title>
         <mat-divider></mat-divider>
@@ -13,7 +13,17 @@
     </div>
   </div>
 
+  <mat-card *ngIf="albums.loading" fxLayoutAlign="center">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </mat-card>
+
   <div *ngIf="hasNextPage" fxLayout fxLayoutAlign="center center">
-    <button mat-stroked-button (click)="loadNextPageAndAppend()">Load more</button>
+    <button
+      mat-stroked-button
+      [disabled]="albums.loading"
+      (click)="page = page + 1; loadPageAndAppend()"
+    >
+      Load more
+    </button>
   </div>
 </div>

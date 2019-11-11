@@ -18,7 +18,7 @@ interface AlbumWithUser extends IAlbum {
   styleUrls: ['./album-details-page.component.css']
 })
 export class AlbumDetailsPageComponent implements OnInit {
-  albumId: string;
+  albumId: string = this.route.snapshot.params['id'];
   album: IAsyncDataStatus<AlbumWithUser>;
   photos: IPhoto[] = [];
 
@@ -27,9 +27,7 @@ export class AlbumDetailsPageComponent implements OnInit {
     private albumService: AlbumService,
     private route: ActivatedRoute,
     private titleService: Title
-  ) {
-    this.albumId = this.route.snapshot.params['id'];
-  }
+  ) {}
 
   ngOnInit() {
     this.loadAlbum();

@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { ISearchParams } from '../interfaces/utility/pagination';
 import { IAlbum } from '../interfaces/models/album';
-import { Observable, of, from } from 'rxjs';
-import { map, switchMap, mergeMap } from 'rxjs/operators';
-import { UserService } from './user.service';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { IUser } from '../interfaces/models/user';
 import { asyncDataObservable, IAsyncDataStatus } from '../utils/async-data-observable';
 
@@ -24,8 +23,8 @@ export class AlbumService {
 
   constructor(private api: ApiService) {}
 
-  getAlbums(params?: IFilters) {
-    return this.api.get<IAlbum[]>('/albums', params);
+  getAlbums(params?: IFilters): Observable<IAsyncDataStatus<IAlbum[]>> {
+    return asyncDataObservable(this.api.get<IAlbum[]>('/albums', params));
   }
 
   getAlbum(id: number | string): Observable<IAsyncDataStatus<IAlbumWithAuthor>> {
